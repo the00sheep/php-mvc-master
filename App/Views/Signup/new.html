@@ -90,7 +90,8 @@
                 name: 'required',
                 email:{
                     required: true,
-                    email: true
+                    email: true,
+                    remote: '/account/validateEmail'
                 },
                 password:{
                     required:true,
@@ -100,7 +101,13 @@
                 password_confirmation:{
                     equalTo: '#inputPassword'
                 }
-            }
+                
+            },
+            messages:{
+                    email: {
+                        remote: 'email is already taken'
+                    }
+                }
         });
     });
 

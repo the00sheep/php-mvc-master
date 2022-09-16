@@ -103,7 +103,7 @@ class User extends \Core\Model
             $this->errors[] = 'Invalid email';
         }
 
-        if ($this->emailExists($this->email)){
+        if (static::emailExists($this->email)){
             $this->errors[] = 'Email is taken';
         }
 
@@ -138,7 +138,7 @@ class User extends \Core\Model
      *  
      */
 
-     protected function emailExists($email){
+     public static function emailExists($email){
         $sql = 'SELECT * FROM users WHERE email = :email';
 
         $db = static::getDB();
