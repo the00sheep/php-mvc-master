@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Add a new hotel{% endblock %}
+
+{% block body %}
+
+    <h1>Adaugare hotel nou</h1>
+
+    <form method="post" class="signUpForm" action="/hotelController/createAction">
+        <div class="form-group">
+            <label for="inputName">Name</label>
+            <input name="name" class="form-control" id="inputName" placeholder="Name" autofocus required>
+        </div>
+
+        <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input name="adress" class="form-control" id="inputAddress" placeholder="Adress" required>
+        </div>
+
+        <div class="form-group">
+            <label for="city">City</label>
+            <input name="city" class="form-control" id="city" placeholder="City" required>
+        </div>
+        <div class="form-group">
+            <label for="zipCode">Zip Code</label>
+            <input name="zipCode" class="form-control" id="zipCode" placeholder="Zip Code">
+        </div>
+        <div class="form-group">
+            <label for="website">Website</label>
+            <input name="website" class="form-control" id="website" placeholder="Website">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+        </div>
+
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <br>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    
+    <style>
+        .signUpForm{
+            max-width: 50%;
+            margin-left: 1%;
+            margin-top: 1%;
+            border: 1px solid gray;
+            padding: 1%;
+            border-radius: 0%;
+        }
+
+        .form-group{
+            margin-bottom: 2%;
+        }
+    </style>
+    
+{% endblock %}
