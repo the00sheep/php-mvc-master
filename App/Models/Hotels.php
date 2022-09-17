@@ -117,16 +117,31 @@ class Hotels extends \Core\Model
     }
 
  
-    public function save()
+    public function save($edit = 0)
     {
         $this->validate();
 
         if (empty($this->errors)){
-   
+            
+            
             //sql insert new hotel into hotels table
-            $sql = 'INSERT INTO hotels (name, address, city, country, zipcode, website, email, vergeprice, status)
-                VALUES (:name, :address, :city, :zipcode, :country, :website, :email, :vergeprice, 1)';
-        
+           if( $edit == 0){
+                $sql = 'INSERT INTO hotels (name, address, city, country, zipcode, website, email, vergeprice, status)
+                        VALUES             (:name, :address, :city, :country, :zipcode, :website, :email, :vergeprice, 1)';
+            }
+           else{
+            $sql = "UPDATE hotels SET name       = :name,
+                                      address    = :address,
+                                      city       = :city,
+                                      country    = :country,
+                                      zipcode    = :zipcode,
+                                      website    = :website,
+                                      email      = :email,
+                                      vergeprice = :vergeprice,
+                                      status     = :status
+                    WHERE hotel_id = '.$this->id.'";
+           } 
+           
             $db = static::getDB();
             $stmt = $db->prepare($sql);
         
@@ -138,9 +153,13 @@ class Hotels extends \Core\Model
             $stmt->bindValue(':website',    $this->website, PDO::PARAM_STR);
             $stmt->bindValue(':email',      $this->email, PDO::PARAM_STR);
             $stmt->bindValue(':vergeprice', $this->vergeprice, PDO::PARAM_STR);
-            $stmt->bindValue(':status',     $this->status, PDO::PARAM_STR);
-                
 
+            if( $edit == 1){
+                $stmt->bindValue(':status',     $this->status, PDO::PARAM_STR);
+            }
+
+            //var_dump($stmt);
+            //exit;
             //PDO method returns true on success, false on failure 
             return $stmt->execute();
         }
@@ -187,7 +206,7 @@ class Hotels extends \Core\Model
             $this->error[] = 'Name is required'; 
         }
 
-        if ($this->adress == ''){
+        if ($this->address == ''){
             $this->error[] = 'Adress is required'; 
         }
 
