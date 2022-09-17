@@ -3,6 +3,12 @@
 namespace App\Models;
 
 use PDO;
+use \App\Config;
+use \App\Token;
+use \Core\View;
+use \App\Mail;
+use \App\Paginator;
+
 
 class Hotels extends \Core\Model
 {
@@ -21,17 +27,26 @@ class Hotels extends \Core\Model
        };
     }
 
-    /**
-     * Get all the hotels as an associative array
+  
+      /**
+     * Get all hotels
      *
-     * @return array
+     * @return array  An array of all the hotel records
      */
-    
-    public static function getAll()
+    public static function getAllHotels()
     {
         $db = static::getDB();
-        $stmt = $db->query('SELECT * FROM hotels');
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $sql = 'SELECT * FROM hotels
+                ORDER BY name';
+
+        $stmt = $db->prepare($sql);
+
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
     }
 
     public function save()

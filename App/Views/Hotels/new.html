@@ -37,35 +37,42 @@
         
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    
 
     <br>
     <table class="table">
+  
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Name</th>
+            <th scope="col">address</th>
+            <th scope="col">city</th>
+            <th scope="col">zipcode</th>
+            <th scope="col">website</th>
+            <th scope="col">email</th>
+            <th scope="col">price</th>
+            <th scope="col">status</th>
+            <th scope="col">actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+        {% for hotels in hotels %}
+        <tr>
+            <th scope="row">{{hotels.hotel_id}}</th>
+            <td>{{hotels.name}}</td>
+            <td>{{hotels.address}}</td>
+            <td>{{hotels.city}}</td>
+            <td>{{hotels.zipcode}}</td>
+            <td>{{hotels.website}}</td>
+            <td>{{hotels.email}}</td>
+            <td>{{hotels.verge_price}}</td>
+            <td>{{hotels.status}}</td>
+            <td>
+              
+            </td>
+        </tr>
+        {% endfor %}
         </tbody>
       </table>
     

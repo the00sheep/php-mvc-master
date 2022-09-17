@@ -21,12 +21,18 @@ class hotelController extends \Core\Controller
 
   public function newAction()
   {  
-       View::renderTemplate('Hotels/new.html');
+      $hotelList = Hotels::getAllHotels();
+      //var_dump($hotelList);
+      //exit();
+      View::renderTemplate('Hotels/new.html', [
+        'hotels' => $hotelList
+    ]);
   }
 
   public function createAction()
   {
     $hotels = new Hotels($_POST);
+   
     
     var_dump($_POST);
     //$hotels->save();
