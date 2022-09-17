@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}List hotels{% endblock %}
+
+{% block body %}
+<h1>
+    List of hotels
+</h1>
+<br>
+    <table class="table">
+  
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col"><a href="/hotelController/list?orderBy=name">Name</a></th>
+            <th scope="col">Addres</a></th>
+            <th scope="col"><a href="/hotelController/list?orderBy=city">city</a></th>
+            <th scope="col"><a href="/hotelController/list?orderBy=country">country</a></th>
+            <th scope="col">zipcode</th>
+            <th scope="col">website</th>
+            <th scope="col">email</th>
+            <th scope="col"><a href="/hotelController/list?orderBy=vergeprice">price</a></th>
+            <th scope="col">status</th>
+            <th scope="col">actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for hotels in hotels %}
+        <tr>
+            <th scope="row">{{hotels.hotel_id}}</th>
+            <td>{{hotels.name}}</td>
+            <td>{{hotels.address}}</td>
+            <td>{{hotels.city}}</td>
+            <td>{{hotels.country}}</td>
+            <td>{{hotels.zipcode}}</td>
+            <td>{{hotels.website}}</td>
+            <td>{{hotels.email}}</td>
+            <td>{{hotels.vergeprice}}</td>
+            <td>{{hotels.status}}</td>
+
+            {% if hotels.status == true %}
+                <td><a href = '/hotelController/deleteHotel?id={{hotels.hotel_id}}'>DELETE</a></td>
+            {% else %}
+            
+                <td><a href = "/hotelController/activateHotel?id={{hotels.hotel_id}}">ACTIVATE</a></td>
+            {% endif %}
+            
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+
+      <style>
+        .signUpForm{
+            max-width: 50%;
+            margin-left: 1%;
+            margin-top: 1%;
+            border: 1px solid gray;
+            padding: 1%;
+            border-radius: 0%;
+        }
+
+        .form-group{
+            margin-bottom: 2%;
+        }
+    </style>
+{% endblock %}
