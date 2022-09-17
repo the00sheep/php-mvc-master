@@ -52,42 +52,60 @@ class Hotels extends \Core\Model
         
        
         switch ($orderBy) {
-            case "name":
+            case "nameASC":
                 $sql = 'SELECT * FROM hotels
-                        ORDER BY name';
+                        ORDER BY status DESC, name';
                 break;
-            case "address":
+            case "addressASC":
                 $sql = 'SELECT * FROM hotels
-                        ORDER BY address';
+                        ORDER BY status DESC, address';
                 break;
-            case "city":
+            case "cityASC":
                 $sql = 'SELECT * FROM hotels
-                        ORDER BY city';
+                        ORDER BY status DESC, city';
                 break;
-            case 'country':
+            case 'countryASC':
                 $sql = 'SELECT * FROM hotels
-                        ORDER BY country';
+                        ORDER BY status DESC, country';
                 break;
-            case 'zipcode':
+            case 'zipcodeASC':
                 $sql = 'SELECT * FROM hotels
-                        ORDER BY zipcode';  
+                        ORDER BY status DESC, zipcode';  
                 break;
-             case 'website':
+             case 'websiteASC':
                 $sql = 'SELECT * FROM hotels
-                        ORDER BY website';
+                        ORDER BY status DESC, website';
                 break;
-            case 'email':
+            case 'emailASC':
                 $sql = 'SELECT * FROM hotels
-                        ORDER BY email';
+                        ORDER BY status DESC, email';
                   break;
-            case 'vergeprice':
+            case 'vergepriceASC':
                 $sql = 'SELECT * FROM hotels
-                        ORDER BY vergeprice';     
+                       ORDER BY status DESC, vergeprice';     
                 break;
-            default:  $sql = 'SELECT * FROM hotels';
+            default:  $sql = 'SELECT * FROM hotels
+                              ORDER BY status DESC';
         }
 
               
+
+        $stmt = $db->prepare($sql);
+
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public static function getHotel($id = 0)
+    {    
+        $db = static::getDB();
+        
+               
+        $sql = "SELECT * FROM hotels  WHERE  hotel_id ='{$id}'";
+
 
         $stmt = $db->prepare($sql);
 

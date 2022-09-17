@@ -67,6 +67,16 @@ class hotelController extends \Core\Controller
 
   }
 
+  public function editHotel(){
+    if(isset($_GET['id']) && !empty($_GET['id'])){
+      $id = $_GET['id'];
+    }
+
+    $hotelList = Hotels::getHotel($id);
+
+    var_dump($hotelList);
+  }
+
   /**
    * Soft delete, sets status to 0
    */
@@ -108,6 +118,8 @@ class hotelController extends \Core\Controller
     }
     
   }
+
+
 
   public function successAction()
   {

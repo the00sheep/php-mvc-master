@@ -7,27 +7,36 @@
     List of hotels
 </h1>
 <br>
-    <table class="table">
+    <table class="table table-striped">
   
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col"><a href="/hotelController/list?orderBy=name">Name</a></th>
+            <th scope="col"><a href="/hotelController/list?orderBy=nameASC">Name</a></th>
             <th scope="col">Addres</a></th>
-            <th scope="col"><a href="/hotelController/list?orderBy=city">city</a></th>
-            <th scope="col"><a href="/hotelController/list?orderBy=country">country</a></th>
+            <th scope="col"><a href="/hotelController/list?orderBy=cityASC">city</a></th>
+            <th scope="col"><a href="/hotelController/list?orderBy=countryASC">country</a></th>
             <th scope="col">zipcode</th>
             <th scope="col">website</th>
             <th scope="col">email</th>
-            <th scope="col"><a href="/hotelController/list?orderBy=vergeprice">price</a></th>
+            <th scope="col"><a href="/hotelController/list?orderBy=vergepriceASC">price</a></th>
             <th scope="col">status</th>
-            <th scope="col">actions</th>
+            <th scope="col">edit</th>
           </tr>
         </thead>
         <tbody>
         {% for hotels in hotels %}
-        <tr>
-            <th scope="row">{{hotels.hotel_id}}</th>
+
+        {% if hotels.status == true %}
+            <tr>
+        {% else %}
+            <tr class="inactive">
+        {% endif %}
+                
+            
+                <th scope="row">{{hotels.hotel_id}}</th>
+        
+           
             <td>{{hotels.name}}</td>
             <td>{{hotels.address}}</td>
             <td>{{hotels.city}}</td>
@@ -36,15 +45,14 @@
             <td>{{hotels.website}}</td>
             <td>{{hotels.email}}</td>
             <td>{{hotels.vergeprice}}</td>
-            <td>{{hotels.status}}</td>
+            
 
             {% if hotels.status == true %}
-                <td><a href = '/hotelController/deleteHotel?id={{hotels.hotel_id}}'>DELETE</a></td>
+                <td class=>{{hotels.status}} <a href = '/hotelController/deleteHotel?id={{hotels.hotel_id}}'>DELETE</a></td>
             {% else %}
-            
                 <td><a href = "/hotelController/activateHotel?id={{hotels.hotel_id}}">ACTIVATE</a></td>
             {% endif %}
-            
+            <td><a href = "/hotelController/editHotel?id={{hotels.hotel_id}}">EDIT</a></td>
         </tr>
         {% endfor %}
         </tbody>
@@ -63,6 +71,10 @@
 
         .form-group{
             margin-bottom: 2%;
+        }
+
+        tr.inactive{
+            background-color: #616161;
         }
     </style>
 {% endblock %}
