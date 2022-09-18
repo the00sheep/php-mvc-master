@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Models\Hotels;
+use \App\Models\Search;
 
 
 /**
@@ -147,7 +148,6 @@ class hotelController extends \Core\Controller
   }
 
 
-
   public function successAction()
   {
     $edit = 'adaugat';
@@ -158,4 +158,21 @@ class hotelController extends \Core\Controller
     View::renderTemplate('Hotels/success.html',[
     'edit' => $edit]);
   }
+
+
+  public function search()
+  {
+      $data = "k";
+      if(isset($_GET['q'])){
+          $data = $_GET['q'];
+      }
+      var_dump($data);
+
+      $searchResults = Search::getSearchResults($data);
+      var_dump($searchResults);
+      View::renderTemplate('Home/search.html', [
+          'searchResults' =>  $searchResults
+      ]);
+  }
+  
 }

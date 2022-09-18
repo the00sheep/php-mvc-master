@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div class="temp">
+        <h1>SEARCH</h1>
+        <input type="text" onkeyup="imu(this.value)" placeholder="live search">
+        <div id="content">
+            Results....
+        </div>
+    </div>
+    
+    {% for searchResults in searchResults %}
+        <p>ID: {{searchResults.hotel_id}} Name: {{searchResults.name}}</p>        
+        
+    {% endfor %}
+
+    <script type="text/javascript">
+        let content = document.getElementById('content');
+
+        function imu(x){
+            if (x.length == 0){
+                content.innerHTML = 'No results..'
+                
+            }
+            else{
+                var XML = new XMLHttpRequest();
+                XML.onreadystatechange = function(){
+                    if (XML.readyState == 4 && XML.status == 200){
+                        content.innerHTML = XML.responseText;
+                    }
+                };
+
+                XML.open('GET','./search?data='+x, true);
+                XML.send();
+            }
+        }
+
+       
+    </script>
+    <style>
+        
+        .temp{
+            width: 70%;
+            margin: 1% auto;
+            padding: 20px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .temp h1{
+            text-align: center;
+            text-transform: capitalize;
+            margin-bottom: 3%;
+        }
+        .temp input{
+            display: block;
+            width: 60%;
+            margin: 0 auto;
+            height: 34px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 20px;
+            padding: 1px 7px;
+
+        }
+
+        #content{
+            width: 60%;
+            margin: 2% auto;
+            color: #ccc;
+            border-radius: 3px;
+            font-size: 18px;
+            padding: 1px 7px;
+        }
+    </style>
+{% endblock %}

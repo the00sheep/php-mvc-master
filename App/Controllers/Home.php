@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use \Core\View;
+use \App\Models\Search;
+use \App\Models\Hotels;
 
 /**
  * Home controller
@@ -21,4 +23,6 @@ class Home extends \Core\Controller
     {
         View::renderTemplate('Home/index.html');
     }
+
+   
 }
