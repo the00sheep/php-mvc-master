@@ -84,8 +84,8 @@ class hotelController extends \Core\Controller
   public function editSaveHotelAction(){
     
     $hotels = new Hotels($_POST);
-    var_dump($hotels);
-    die;
+    
+
     if($hotels->save(1)){
       
       //post /redirect / get pattern to avoid resubmission

@@ -130,6 +130,7 @@ class Hotels extends \Core\Model
                         VALUES             (:name, :address, :city, :country, :zipcode, :website, :email, :vergeprice, 1)';
             }
            else{
+         
             $sql = "UPDATE hotels SET name       = :name,
                                       address    = :address,
                                       city       = :city,
@@ -139,7 +140,7 @@ class Hotels extends \Core\Model
                                       email      = :email,
                                       vergeprice = :vergeprice,
                                       status     = :status
-                    WHERE hotel_id = '.$this->id.'";
+                    WHERE hotel_id = '$this->id'";
            } 
            
             $db = static::getDB();
@@ -160,6 +161,7 @@ class Hotels extends \Core\Model
 
             //var_dump($stmt);
             //exit;
+            
             //PDO method returns true on success, false on failure 
             return $stmt->execute();
         }
