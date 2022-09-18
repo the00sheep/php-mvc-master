@@ -168,7 +168,7 @@ class hotelController extends \Core\Controller
       $maxprice = 2000; //TBD get max price
 
       $searchResults="";
-
+      
       if(isset($_POST['searchValue'])){
 
                     $name = $_POST['searchValue'];
@@ -184,6 +184,7 @@ class hotelController extends \Core\Controller
                     if(isset($_POST['maxPricesearchValue'])){
                       $maxprice = $_POST['maxPricesearchValue'];
                     }
+
 
                 
 
