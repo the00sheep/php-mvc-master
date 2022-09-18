@@ -162,22 +162,43 @@ class hotelController extends \Core\Controller
 
   public function search()
   {
-      $data = "";
-      $searchResults="";
-      if(isset($_POST['searchValue'])){
-          $data = $_POST['searchValue'];
-      
-      //var_dump($data);
+      $name = "";
+      $city = "";
+      $minprice = 0;
+      $maxprice = 2000; //TBD get max price
 
-      $searchResults = Search::getSearchResults($data);
-      //var_dump($searchResults);
-      View::renderTemplate('Home/search.html', [
-        'searchResults' =>  $searchResults
-    ]);
-    }else{
-      View::renderTemplate('Home/search.html', [
-          'searchResults' =>  $searchResults
-      ]);
+      $searchResults="";
+
+      if(isset($_POST['searchValue'])){
+
+                    $name = $_POST['searchValue'];
+
+                    if(isset($_POST['citySearchValue'])){
+                      $city = $_POST['citySearchValue'];
+                    }
+
+                    if(isset($_POST['minPriceSearchValue'])){
+                      $minprice = $_POST['minPriceSearchValue'];
+                    }
+
+                    if(isset($_POST['maxPricesearchValue'])){
+                      $maxprice = $_POST['maxPricesearchValue'];
+                    }
+
+                
+
+                $searchResults = Search::getSearchResults($name, $city, $minprice, $maxprice);
+                //var_dump($searchResults);
+                View::renderTemplate('Home/search.html', [
+                  'searchResults' =>  $searchResults
+              ]);
+
+    } else{
+
+              View::renderTemplate('Home/search.html', [
+                  'searchResults' =>  $searchResults
+              ]);
+
     }
   }
   
