@@ -151,7 +151,7 @@ class hotelController extends \Core\Controller
   public function successAction()
   {
     $edit = 'adaugat';
-    if(isset($_GET['edit']) && !empty($_GET['edit'])){
+    if(isset($_GET['edit']) && !empty($_GET['searchValue'])){
       $edit = 'editat';
     }
 
@@ -162,17 +162,23 @@ class hotelController extends \Core\Controller
 
   public function search()
   {
-      $data = "k";
-      if(isset($_GET['q'])){
-          $data = $_GET['q'];
-      }
-      var_dump($data);
+      $data = "";
+      $searchResults="";
+      if(isset($_POST['searchValue'])){
+          $data = $_POST['searchValue'];
+      
+      //var_dump($data);
 
       $searchResults = Search::getSearchResults($data);
-      var_dump($searchResults);
+      //var_dump($searchResults);
+      View::renderTemplate('Home/search.html', [
+        'searchResults' =>  $searchResults
+    ]);
+    }else{
       View::renderTemplate('Home/search.html', [
           'searchResults' =>  $searchResults
       ]);
+    }
   }
   
 }

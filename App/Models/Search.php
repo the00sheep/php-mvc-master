@@ -22,7 +22,7 @@ $errors = [];
 
 class Search extends \Core\Model
 {
-    public static function getSearchResults($data){
+    public static function getSearchResults($data, $more = 0){
     
         $sql = "SELECT * FROM hotels WHERE name like '{$data}%'";
         

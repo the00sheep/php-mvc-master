@@ -5,18 +5,32 @@
 {% block body %}
     <div class="temp">
         <h1>SEARCH</h1>
-        <input type="text" onkeyup="imu(this.value)" placeholder="live search">
+        <form action="/HotelController/search"  method="POST" class="searchForm">
+            
+            <input type="text" placeholder="Search" name="searchValue">
+            <button id="expandButton" style="margin: auto;">more options</button>
+            <div id="expandArea">
+                <input type="text" placeholder="city" name="citySearchValue">
+                <input type="text" placeholder="country" name="countrySearchValue">
+                <input type="text" placeholder="Minimum Price" name="minPriceSearchValue">
+                <input type="text" placeholder="Minimum Price" name="maxPricesearchValue">
+            </div>
+            <input type="submit">
+        </form>
         <div id="content">
             Results....
+            {% for searchResults in searchResults %}
+            
+            <p>ID: {{searchResults.hotel_id}} Name: {{searchResults.name}}</p>        
+            
+        {% endfor %}
+    
         </div>
     </div>
     
-    {% for searchResults in searchResults %}
-        <p>ID: {{searchResults.hotel_id}} Name: {{searchResults.name}}</p>        
-        
-    {% endfor %}
-
-    <script type="text/javascript">
+    {% block footer %}
+    
+    <!--script type="text/javascript">
         let content = document.getElementById('content');
 
         function imu(x){
@@ -38,9 +52,26 @@
         }
 
        
+    </script-->
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $( "#expandButton" ).click(function() {
+                event.preventDefault();
+               
+                $( "#expandArea" ).toggle( "slow", function() {
+                    // Animation complete.
+                });
+            });
+        });
     </script>
+
+    {% endblock %}
+    
+
     <style>
-        
+        #expandArea{
+            display: none;
+        }
         .temp{
             width: 70%;
             margin: 1% auto;
@@ -72,6 +103,13 @@
             border-radius: 3px;
             font-size: 18px;
             padding: 1px 7px;
+        }
+
+        .searchForm{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 {% endblock %}
