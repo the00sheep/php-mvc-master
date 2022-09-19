@@ -164,6 +164,7 @@ class hotelController extends \Core\Controller
   {
       $name = "";
       $city = "";
+      $country = "";
       $minprice = 0;
       $maxprice = 2000; //TBD get max price
 
@@ -177,18 +178,18 @@ class hotelController extends \Core\Controller
                       $city = $_POST['citySearchValue'];
                     }
 
-                    if(isset($_POST['minPriceSearchValue'])){
+                    if(isset($_POST['minPriceSearchValue']) && !empty($_POST['minPriceSearchValue'])){
                       $minprice = $_POST['minPriceSearchValue'];
                     }
 
-                    if(isset($_POST['maxPricesearchValue'])){
+                    if(isset($_POST['maxPricesearchValue']) && !empty($_POST['maxPricesearchValue'])){
                       $maxprice = $_POST['maxPricesearchValue'];
                     }
 
 
                 
 
-                $searchResults = Search::getSearchResults($name, $city, $minprice, $maxprice);
+                $searchResults = Search::getSearchResults($name, $city, $country, $minprice, $maxprice);
                 //var_dump($searchResults);
                 View::renderTemplate('Home/search.html', [
                   'searchResults' =>  $searchResults
