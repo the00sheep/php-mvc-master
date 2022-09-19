@@ -190,7 +190,7 @@ class hotelController extends \Core\Controller
                 
 
                 $searchResults = Search::getSearchResults($name, $city, $country, $minprice, $maxprice);
-                //var_dump($searchResults);
+            
                 View::renderTemplate('Home/search.html', [
                   'searchResults' =>  $searchResults
               ]);
